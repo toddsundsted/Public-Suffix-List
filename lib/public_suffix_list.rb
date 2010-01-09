@@ -55,6 +55,7 @@ class PublicSuffixList
   end
 
   def best(results)
+    return [] if results.empty?
     result = results.find { |r| r.last[0] == ?! } || results.sort { |a, b| a.size <=> b.size }.last
     result = result[0..result.size - 2] if result.last[0] == ?!
     result

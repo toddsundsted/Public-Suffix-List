@@ -1,0 +1,6 @@
+com
+*.jp
+*.hokkaido.jp
+*.tokyo.jp
+!pref.hokkaido.jp
+!metro.tokyo.jp 

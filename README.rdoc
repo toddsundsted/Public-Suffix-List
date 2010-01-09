@@ -21,7 +21,7 @@ easier to use.
 
 == Synopsis
 
-  PublicSufficList.new.tld("foobar.com") # downloads the latest data file and returns "com"
+  PublicSuffixList.new.tld("foobar.com") # downloads the latest data file and returns "com"
 
 == Requirements
 
