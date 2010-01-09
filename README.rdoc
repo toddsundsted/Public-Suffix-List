@@ -1,0 +1,55 @@
+= Public Suffix List
+
+* http://github.com/toddsundsted/Public-Suffix-List
+
+== Description
+
+The Public Suffix List (http://publicsuffix.org/) is "a cross-vendor
+initiative to provide an accurate list of domain name suffixes". Such
+a list is necessary because "there was and remains no algorithmic
+method of finding the highest level at which a domain may be
+registered for a particular top-level domain (the policies differ with
+each registry)...". Public Suffix List is also a small Ruby library
+designed to make the Public Suffix List (http://publicsuffix.org/)
+easier to use.
+
+== Features
+
+* Transparent download of the TLD data file
+* Optional caching of parsed data
+* Tiny API
+
+== Synopsis
+
+  PublicSufficList.new.tld("foobar.com") # downloads the latest data file and returns "com"
+
+== Requirements
+
+None that I am aware of.
+
+== Install
+
+  sudo gem install public-suffix-list
+
+== License
+
+Copyright (c) 2010 Todd Sundsted
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
