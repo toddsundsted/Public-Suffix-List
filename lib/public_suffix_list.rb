@@ -101,7 +101,7 @@ class PublicSuffixList
   end
 
   def gimme!(domain, n = 1)
-    domain.slice!(-n, n)
+    domain.slice!(-n, n) || []
   end
 
 end
