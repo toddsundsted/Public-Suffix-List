@@ -21,7 +21,25 @@ easier to use.
 
 == Synopsis
 
-  PublicSuffixList.new.tld("foobar.com") # downloads the latest data file and returns "com"
+  require "public_suffix_list"
+
+  # downloads and parses the latest data file and returns "com"
+  PublicSuffixList.new.tld("foobar.com")
+
+  # downloads and parses the latest data file and returns "foobar.com"
+  PublicSuffixList.new.cdn("foobar.com")
+
+  # downloads and parses the latest data file, caches it in /tmp, returns ["abc", "xyz", "co.uk"]
+  PublicSuffixList.new(:cache_dir => "/tmp").split("abc.xyz.co.uk")
+
+  # loads the cached data in /tmp and returns ["test", "nhs", "uk"]
+  PublicSuffixList.new(:cache_dir => "/tmp").split("test.nhs.uk")
+
+  # you don't have to instantiate PublicSuffixList every time you use it, of course...
+  p = PublicSuffixList.new
+  p.split("fee.fi.fo.com") # => ["fee.fi", "fo", "com"]
+  p.cdn("fee.fi.fo.com")   # => "fo.com", "cdn" is "canonical domain name"
+  p.tld("fee.fi.fo.com")   # => "com", "tld" is "top-level domain"
 
 == Requirements
 
