@@ -5,7 +5,7 @@ require "public_suffix_list/parser.rb"
 
 class PublicSuffixList
 
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
 
   def self.config
     @@config ||= Config.new
@@ -84,10 +84,10 @@ class PublicSuffixList
     domain = domain.dup
     first = domain.pop
     set = []
-    [[first, first], ["!#{first}", "!#{first}"], ["*", first]].each do |a, b|
-      if rules[a]
-        set << [b]
-        match(domain, rules[a]).each { |result| set << [first] + result }
+    [[first, first], ["!#{first}", "!#{first}"], ["*", first]].each do |pattern, name|
+      if rules[pattern]
+        set << [name] if rules[pattern][:term]
+        match(domain, rules[pattern]).each { |result| set << [first] + result }
       end
     end
     set

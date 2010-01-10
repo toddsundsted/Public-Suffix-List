@@ -13,6 +13,14 @@ describe PublicSuffixList do
     @public_suffix_list.tld("foobar.com").should == "com"
   end
 
+  it "should not assume the root name is a top level domain" do
+    @public_suffix_list.tld("com").should == "com"
+    @public_suffix_list.tld("bar.foo").should == "bar.foo"
+    @public_suffix_list.tld("baz.foo").should == "baz.foo"
+    @public_suffix_list.tld("qux.foo").should == ""
+    @public_suffix_list.tld("foo").should == ""
+  end
+
   it "should handle edge cases correctly" do
     @public_suffix_list.split("").should == ["", "", ""]
     @public_suffix_list.cdn("").should == ""

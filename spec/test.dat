@@ -1,6 +1,13 @@
+// data for cookie calculation, http://publicsuffix.org/format/
 com
 *.jp
 *.hokkaido.jp
 *.tokyo.jp
 !pref.hokkaido.jp
 !metro.tokyo.jp 
+
+// "foo" and "qux.foo" are not tlds
+bar.foo
+baz.foo
+one.qux.foo
+two.qux.foo

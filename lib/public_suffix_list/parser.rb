@@ -2,17 +2,34 @@ class PublicSuffixList
 
   module Parser
 
+    # com
+    # *.jp
+    # *.hokkaido.jp
+    # *.tokyo.jp
+    # !pref.hokkaido.jp
+    # !metro.tokyo.jp
+
+    # {
+    #   "com" => {:term => true}, 
+    #   "jp" => {
+    #     "tokyo" => {"!metro" => {:term => true}, "*" => {:term => true}},
+    #     "hokkaido" => {"!pref" => {:term => true}, "*" => {:term => true}},
+    #     "*" => {:term => true}
+    #   }
+    # }
+
     def self.parse(lines)
-      lines.inject({}) do |a, line|
+      lines.inject({}) do |acc, line|
         line.strip!
         unless line =~ %r{//} or line.empty?
-          t = a
+          tmp = acc
           line.split(".").reverse.each do |p|
-            t[p] = {} unless t[p]
-            t = t[p]
+            tmp[p] = {} unless tmp[p]
+            tmp = tmp[p]
           end
+          tmp[:term] = true
         end
-        a
+        acc
       end
     end
 

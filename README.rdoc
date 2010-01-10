@@ -16,7 +16,7 @@ easier to use.
 == Features
 
 * Transparent download of the TLD data file
-* Optional caching of parsed data
+* Optional caching of optimized, parsed TLD data
 * Tiny API
 
 == Synopsis
