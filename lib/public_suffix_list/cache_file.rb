@@ -42,14 +42,6 @@ class PublicSuffixList
       !cache? or !([0, nil].include?(@config.cache_expiry_period) or data[:created_at] + @config.cache_expiry_period > Time.now)
     end
 
-    def read_attribute(attribute)
-      data[attribute]
-    end
-
-    def write_attribute(attribute, value)
-      data[attribute] = value
-    end
-
   end
 
 end
