@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   DESCRIPTION
   s.homepage = %q{http://github.com/toddsundsted/Public-Suffix-List}
   s.authors = ["Todd Sundsted"]
-  s.version = "0.0.4"
+  s.version = "0.0.5"
   s.rubygems_version = %q{1.3.5}
   s.require_paths = ["lib"]
   s.files = [
