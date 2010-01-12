@@ -10,12 +10,8 @@ class PublicSuffixList
       @config.cache_dir && File.directory?(@config.cache_dir) && true
     end
 
-    def name
-      URI.parse(@config.effective_tld_names_url).path.split("/").last + ".cache" if cache?
-    end
-
     def file
-      File.join(@config.cache_dir, name) if cache?
+      File.join(@config.cache_dir, URI.parse(@config.effective_tld_names_url).path.split("/").last + ".cache") if cache?
     end
 
     def exist?
