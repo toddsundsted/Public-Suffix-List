@@ -1,11 +1,12 @@
 $:.unshift(File.dirname(__FILE__)) unless $:.include?(File.dirname(__FILE__))
 
 require 'open-uri'
+require "public_suffix_list/cache_file.rb"
 require "public_suffix_list/parser.rb"
 
 class PublicSuffixList
 
-  VERSION = "0.0.3"
+  VERSION = "0.0.4"
 
   def self.config
     @@config ||= Config.new
@@ -28,6 +29,8 @@ class PublicSuffixList
     end
 
   end
+
+  attr_reader :config
 
   def initialize(options = {})
     @config = self.class.config.dup
@@ -66,13 +69,17 @@ class PublicSuffixList
   end
 
   def cache
-    @cache = {:rules => @rules, :created_at => Time.now}
+    @cache = {:rules => @rules, :created_at => Time.now, :tag => rand(36**8).to_s(36)}
     open(File.join(@config.cache_dir, name), "w") { |f| Marshal.dump(@cache, f) }
   end
 
   def uncache
     open(File.join(@config.cache_dir, name), "r") { |f| @cache = Marshal.load(f) }
-    @rules = @cache[:rules] if Time.now < @cache[:created_at] + @config.cache_expiry_period
+    @rules = @cache[:rules] unless expired?
+  end
+
+  def expired?
+    !(@config.cache_expiry_period.nil? or @config.cache_expiry_period == 0 or Time.now < @cache[:created_at] + @config.cache_expiry_period)
   end
 
   def download
