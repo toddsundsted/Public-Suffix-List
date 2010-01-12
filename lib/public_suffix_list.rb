@@ -30,11 +30,14 @@ class PublicSuffixList
 
   end
 
-  attr_reader :config
+  attr_reader :config, :cache_file
 
   def initialize(options = {})
     @config = self.class.config.dup
     options.each { |k, v| @config.send("#{k}=", v) }
+    if @config.cache_dir
+      @cache_file = CacheFile.new(@config)
+    end
     if @config.cache_dir && File.directory?(@config.cache_dir) && File.exist?(File.join(@config.cache_dir, name))
       uncache or (download and cache)
     elsif @config.cache_dir && File.directory?(@config.cache_dir)

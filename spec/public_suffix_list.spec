@@ -4,6 +4,7 @@ describe PublicSuffixList do
 
   before do
     @public_suffix_list = PublicSuffixList.new(:effective_tld_names_url => "spec/test.dat")
+    @public_suffix_list.cache_file.should be nil
   end
 
   it "should calculate tld and cdn correctly" do
