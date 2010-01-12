@@ -7,7 +7,7 @@ class PublicSuffixList
     end
 
     def cache?
-      @config.cache_dir && true
+      @config.cache_dir && File.directory?(@config.cache_dir) && true
     end
 
     def name
@@ -35,7 +35,7 @@ class PublicSuffixList
     end
 
     def data
-      @data or (load_data and @data) or @data = {:created_at => Time.now}
+      @data or (load_data and @data) or @data = {:created_at => Time.now, :tag => rand(36**8).to_s(36)}
     end
 
     def data=(data)

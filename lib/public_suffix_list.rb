@@ -38,9 +38,9 @@ class PublicSuffixList
     if @config.cache_dir
       @cache_file = CacheFile.new(@config)
     end
-    if @config.cache_dir && File.directory?(@config.cache_dir) && File.exist?(File.join(@config.cache_dir, name))
+    if @cache_file and @cache_file.exist?
       uncache or (download and cache)
-    elsif @config.cache_dir && File.directory?(@config.cache_dir)
+    elsif @cache_file
       download and cache
     else
       download
