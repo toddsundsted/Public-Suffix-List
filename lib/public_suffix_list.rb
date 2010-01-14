@@ -6,7 +6,7 @@ require "public_suffix_list/parser.rb"
 
 class PublicSuffixList
 
-  VERSION = "0.0.5"
+  VERSION = "0.0.6"
 
   def self.config
     @@config ||= Config.new
@@ -39,54 +39,48 @@ class PublicSuffixList
       @cache_file = CacheFile.new(@config)
     end
     if @cache_file and @cache_file.exist?
-      uncache or (download and cache)
+      uncache or (fetch and cache)
     elsif @cache_file
-      download and cache
+      fetch and cache
     else
-      download
+      fetch
     end
+  end
+
+  def rules
+    @rules
   end
 
   def split(domain)
     domain = domain.split(".")
-    result = best(match(domain, @rules))
+    result = best(match(domain, rules))
     [gimme!(domain, result.size), gimme!(domain), domain].reverse.map { |d| d ? d.join(".") : "" }
   end
 
   def tld(domain)
     domain = domain.split(".")
-    result = best(match(domain, @rules))
+    result = best(match(domain, rules))
     gimme!(domain, result.size).join(".")
   end
 
   def cdn(domain)
     domain = domain.split(".")
-    result = best(match(domain, @rules))
+    result = best(match(domain, rules))
     gimme!(domain, result.size + 1).join(".")
   end
 
   private
 
-  def name
-    URI.parse(@config.effective_tld_names_url).path.split("/").last + ".cache"
+  def fetch
+    @rules = Parser.parse(open(@config.effective_tld_names_url))
   end
 
   def cache
-    @cache = {:rules => @rules, :created_at => Time.now, :tag => rand(36**8).to_s(36)}
-    open(File.join(@config.cache_dir, name), "w") { |f| Marshal.dump(@cache, f) }
+    @cache_file[:rules] = rules
   end
 
   def uncache
-    open(File.join(@config.cache_dir, name), "r") { |f| @cache = Marshal.load(f) }
-    @rules = @cache[:rules] unless expired?
-  end
-
-  def expired?
-    !(@config.cache_expiry_period.nil? or @config.cache_expiry_period == 0 or Time.now < @cache[:created_at] + @config.cache_expiry_period)
-  end
-
-  def download
-    @rules = Parser.parse(open(@config.effective_tld_names_url))
+    rules = @cache_file[:rules] unless @cache_file.expired?
   end
 
   def match(domain, rules)

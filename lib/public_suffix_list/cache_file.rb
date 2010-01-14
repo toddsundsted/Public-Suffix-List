@@ -38,6 +38,14 @@ class PublicSuffixList
       @data = data and dump_data
     end
 
+    def [](key)
+      data[key]
+    end
+
+    def []=(key, value)
+      data[key] = value and dump_data
+    end
+
     def expired?
       !cache? or !([0, nil].include?(@config.cache_expiry_period) or data[:created_at] + @config.cache_expiry_period > Time.now)
     end
