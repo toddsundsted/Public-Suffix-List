@@ -11,7 +11,17 @@ method of finding the highest level at which a domain may be
 registered for a particular top-level domain (the policies differ with
 each registry)...". Public Suffix List is also a small Ruby library
 designed to make the Public Suffix List (http://publicsuffix.org/)
-easier to use.
+easier to use.  Public Suffix List will transparently download the
+latest list of top-level domains, parse the list, and optionally cache
+the parsed data.
+
+The public API is as simple as I could make it.  Instantiating the
+PublicSuffixList class downloads, parses, and caches the data.  There
+are three instance methods:
+
+[*tld*(domain)] return the top-level domain name
+[*cdn*(domain)] return the canonical domain name
+[*split*(domain)] split the domain name into parts
 
 == Features
 
