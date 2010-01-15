@@ -6,7 +6,7 @@ require "public_suffix_list/parser.rb"
 
 class PublicSuffixList
 
-  VERSION = "0.0.6"
+  VERSION = "0.1.0"
 
   def self.config
     @@config ||= Config.new
@@ -20,12 +20,16 @@ class PublicSuffixList
 
     attr_accessor :cache_dir
     attr_accessor :cache_expiry_period
-    attr_accessor :effective_tld_names_url
+    attr_accessor :url
+
+    # effective_tld_names_url is deprecated
+    alias_method :effective_tld_names_url, :url
+    alias_method :effective_tld_names_url=, :url=
 
     def initialize
       @cache_dir = nil
       @cache_expiry_period = 30 * 24 * 60 * 60
-      @effective_tld_names_url = "http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/src/effective_tld_names.dat?raw=1"
+      @url = "http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/src/effective_tld_names.dat?raw=1"
     end
 
   end
@@ -72,7 +76,7 @@ class PublicSuffixList
   private
 
   def fetch
-    @rules = Parser.parse(open(@config.effective_tld_names_url))
+    @rules = Parser.parse(open(@config.url))
   end
 
   def cache
@@ -80,7 +84,7 @@ class PublicSuffixList
   end
 
   def uncache
-    rules = @cache_file[:rules] unless @cache_file.expired?
+    @rules = @cache_file[:rules] unless @cache_file.expired?
   end
 
   def match(domain, rules)

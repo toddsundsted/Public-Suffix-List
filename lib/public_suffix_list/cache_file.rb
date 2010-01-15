@@ -11,7 +11,7 @@ class PublicSuffixList
     end
 
     def file
-      File.join(@config.cache_dir, URI.parse(@config.effective_tld_names_url).path.split("/").last + ".cache") if cache?
+      File.join(@config.cache_dir, URI.parse(@config.url).path.split("/").last + ".cache") if cache?
     end
 
     def exist?
