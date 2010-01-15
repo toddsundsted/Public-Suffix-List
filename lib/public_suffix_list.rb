@@ -80,7 +80,7 @@ class PublicSuffixList
   end
 
   def cache
-    @cache_file[:rules] = rules
+    @cache_file[:rules] = @rules
   end
 
   def uncache
