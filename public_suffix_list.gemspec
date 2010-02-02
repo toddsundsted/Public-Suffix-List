@@ -17,17 +17,19 @@ Gem::Specification.new do |s|
   DESCRIPTION
   s.homepage = %q{http://github.com/toddsundsted/Public-Suffix-List}
   s.authors = ["Todd Sundsted"]
-  s.version = "0.1.0"
+  s.version = "0.1.1"
   s.rubygems_version = %q{1.3.5}
   s.require_paths = ["lib"]
   s.files = [
     "README.rdoc",
     "lib/public_suffix_list.rb",
-    "lib/public_suffix_list/parser.rb",
     "lib/public_suffix_list/cache_file.rb",
+    "lib/public_suffix_list/parser.rb",
     "spec/caching.spec",
     "spec/cookie_calculation.spec",
     "spec/public_suffix_list.spec",
+    "spec/rdoc_synopsis.spec",
+    "spec/upcase_downcase.spec",
     "spec/test.dat"
     ]
   s.has_rdoc = true
