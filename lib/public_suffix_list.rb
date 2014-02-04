@@ -29,7 +29,7 @@ class PublicSuffixList
     def initialize
       @cache_dir = nil
       @cache_expiry_period = 30 * 24 * 60 * 60
-      @url = "http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/src/effective_tld_names.dat?raw=1"
+      @url = "http://publicsuffix.org/list/effective_tld_names.dat"
     end
 
   end
