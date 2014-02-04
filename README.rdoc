@@ -45,8 +45,8 @@ are three instance methods:
 
   # Loads the cached data in /tmp if it is less than 100 seconds old,
   # downloads, parses, and caches it if it is older, and returns
-  # ["test", "nhs", "uk"].
-  PublicSuffixList.new(:cache_dir => "/tmp", :cache_expiry_period => 100).split("test.nhs.uk")
+  # ["test", "parliament", "uk"].
+  PublicSuffixList.new(:cache_dir => "/tmp", :cache_expiry_period => 100).split("test.parliament.uk")
 
   # You don't have to instantiate PublicSuffixList every time you
   # use it, of course...
