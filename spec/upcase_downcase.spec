@@ -1,4 +1,4 @@
-require 'lib/public_suffix_list'
+require 'public_suffix_list'
 
 describe PublicSuffixList do
 

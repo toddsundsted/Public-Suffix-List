@@ -1,4 +1,4 @@
-require 'lib/public_suffix_list'
+require 'public_suffix_list'
 
 def cookie_calculation(public_suffix_list, domain)
   s, d, t = public_suffix_list.split(domain)
