@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/toddsundsted/Public-Suffix-List}
   s.authors = ["Todd Sundsted"]
   s.version = "0.1.2"
-  s.rubygems_version = %q{1.3.5}
   s.require_paths = ["lib"]
   s.files = [
+    "Gemfile",
     "README.rdoc",
     "lib/public_suffix_list.rb",
     "lib/public_suffix_list/cache_file.rb",
