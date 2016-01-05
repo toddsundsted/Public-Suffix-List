@@ -65,7 +65,13 @@ None that I am aware of.
 
 == Install
 
-  sudo gem install public-suffix-list
+Install the gem directly:
+
+  gem install public-suffix-list
+
+Or add it to your Gemfile and use bundler:
+
+  gem 'public-suffix-list', '~> 0.1.4'
 
 == License
 
