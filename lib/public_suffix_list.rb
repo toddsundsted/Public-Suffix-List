@@ -15,7 +15,7 @@ class PublicSuffixList
   def self.configure(&block)
     yield config
   end
-  
+
   class Config
 
     attr_accessor :cache_dir
