@@ -1,3 +1,5 @@
+# -*- ruby -*-
+
 Gem::Specification.new do |s|
 
   s.name = %q{public-suffix-list}
