@@ -1,5 +1,7 @@
 # -*- ruby -*-
 
+require "public_suffix_list"
+
 Gem::Specification.new do |s|
 
   s.name = %q{public-suffix-list}
@@ -19,7 +21,7 @@ Gem::Specification.new do |s|
   DESCRIPTION
   s.homepage = %q{http://github.com/toddsundsted/Public-Suffix-List}
   s.authors = ["Todd Sundsted"]
-  s.version = "0.1.4"
+  s.version = PublicSuffixList::VERSION
   s.require_paths = ["lib"]
   s.files = [
     "Gemfile",
