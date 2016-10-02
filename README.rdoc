@@ -41,12 +41,12 @@ are three instance methods:
 
   # Downloads and parses the latest data file, caches it in /tmp,
   # and returns ["abc", "xyz", "co.uk"].
-  PublicSuffixList.new(:cache_dir => "/tmp").split("abc.xyz.co.uk")
+  PublicSuffixList.new(cache_dir: "/tmp").split("abc.xyz.co.uk")
 
   # Loads the cached data in /tmp if it is less than 100 seconds old,
   # downloads, parses, and caches it if it is older, and returns
   # ["test", "parliament", "uk"].
-  PublicSuffixList.new(:cache_dir => "/tmp", :cache_expiry_period => 100).split("test.parliament.uk")
+  PublicSuffixList.new(cache_dir: "/tmp", cache_expiry_period: 100).split("test.parliament.uk")
 
   # You don't have to instantiate PublicSuffixList every time you
   # use it, of course...
@@ -57,7 +57,7 @@ are three instance methods:
 
   # You can even use other data files, both local and remote
   # (as long as they conform to the Public Suffix List file format).
-  PublicSuffixList.new(:url => "spec/test.dat")
+  PublicSuffixList.new(url: "spec/test.dat")
 
 == Requirements
 

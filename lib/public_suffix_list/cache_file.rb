@@ -31,7 +31,7 @@ class PublicSuffixList
     end
 
     def data
-      @data or (load_data and @data) or @data = {:created_at => Time.now, :tag => rand(36**8).to_s(36)}
+      @data or (load_data and @data) or @data = {created_at: Time.now, tag: rand(36**8).to_s(36)}
     end
 
     def data=(data)
