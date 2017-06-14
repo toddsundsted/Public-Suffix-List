@@ -31,7 +31,7 @@ class PublicSuffixList
     end
 
     def data
-      @data or (load_data and @data) or @data = {created_at: Time.now, tag: rand(36**8).to_s(36)}
+      @data or (load_data and @data) or @data = {}
     end
 
     def [](key)
@@ -39,7 +39,7 @@ class PublicSuffixList
     end
 
     def []=(key, value)
-      data[key] = value and dump_data
+      data.merge!({key => value, created_at: Time.now, tag: rand(36**8).to_s(36)}) and dump_data
     end
 
     def expired?
