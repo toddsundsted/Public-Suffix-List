@@ -34,10 +34,6 @@ class PublicSuffixList
       @data or (load_data and @data) or @data = {created_at: Time.now, tag: rand(36**8).to_s(36)}
     end
 
-    def data=(data)
-      @data = data and dump_data
-    end
-
     def [](key)
       data[key]
     end
