@@ -1,6 +1,6 @@
 # -*- ruby -*-
 
-require "public_suffix_list"
+load "lib/public_suffix_list.rb"
 
 Gem::Specification.new do |s|
 
