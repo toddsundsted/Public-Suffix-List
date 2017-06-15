@@ -71,7 +71,7 @@ Install the gem directly:
 
 Or add it to your Gemfile and use bundler:
 
-  gem 'public-suffix-list', '~> 0.1.4'
+  gem 'public-suffix-list'
 
 == License
 
