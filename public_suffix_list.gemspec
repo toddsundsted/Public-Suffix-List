@@ -29,11 +29,11 @@ Gem::Specification.new do |s|
     "lib/public_suffix_list.rb",
     "lib/public_suffix_list/cache_file.rb",
     "lib/public_suffix_list/parser.rb",
-    "spec/caching.spec",
-    "spec/cookie_calculation.spec",
-    "spec/public_suffix_list.spec",
-    "spec/rdoc_synopsis.spec",
-    "spec/upcase_downcase.spec",
+    "spec/caching_spec.rb",
+    "spec/cookie_calculation_spec.rb",
+    "spec/public_suffix_list_spec.rb",
+    "spec/rdoc_synopsis_spec.rb",
+    "spec/upcase_downcase_spec.rb",
     "spec/test.dat"
     ]
   s.has_rdoc = true
