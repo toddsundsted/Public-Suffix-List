@@ -23,7 +23,7 @@ class PublicSuffixList
         line.gsub!(/\s.*/, "")
         unless line =~ %r{//} or line.empty?
           tmp = acc
-          line.split(".").reverse.each do |p|
+          line.split(".").reject(&:empty?).reverse.each do |p|
             tmp[p] = {} unless tmp[p]
             tmp = tmp[p]
           end

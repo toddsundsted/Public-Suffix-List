@@ -13,6 +13,7 @@ describe PublicSuffixList do
     it "parses rules" do
       PublicSuffixList::Parser.parse(["com"]).should eq({"com" => {:term => true}})
       PublicSuffixList::Parser.parse(["com foo"]).should eq({"com" => {:term => true}})
+      PublicSuffixList::Parser.parse([".com."]).should eq({"com" => {:term => true}})
       PublicSuffixList::Parser.parse(["com", "foo.com"]).should eq({"com" => {"foo" => {:term => true}, :term => true}})
       PublicSuffixList::Parser.parse(["foo.com", "com"]).should eq({"com" => {"foo" => {:term => true}, :term => true}})
       PublicSuffixList::Parser.parse(["foo.com", "bar.com"]).should eq({"com" => {"foo" => {:term => true}, "bar" => {:term => true}}})
