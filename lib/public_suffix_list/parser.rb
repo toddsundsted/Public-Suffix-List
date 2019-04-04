@@ -20,7 +20,7 @@ class PublicSuffixList
 
     def self.parse(lines)
       lines.inject({}) do |acc, line|
-        line.strip!
+        line.gsub!(/\s.*/, "")
         unless line =~ %r{//} or line.empty?
           tmp = acc
           line.split(".").reverse.each do |p|
