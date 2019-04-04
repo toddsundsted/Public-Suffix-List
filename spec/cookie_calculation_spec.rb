@@ -8,7 +8,7 @@ end
 describe PublicSuffixList do
 
   it "should calculate cookies as described at http://publicsuffix.org/format/" do
-    public_suffix_list = PublicSuffixList.new(:effective_tld_names_url => "spec/test.dat")
+    public_suffix_list = PublicSuffixList.new(:url => "spec/test.dat")
     cookie_calculation(public_suffix_list, "foo.com").should == "Cookies may be set for foo.com."
     cookie_calculation(public_suffix_list, "foo.bar.jp").should == "Cookies may be set for foo.bar.jp."
     cookie_calculation(public_suffix_list, "bar.jp").should == "Cookies may not be set for bar.jp."
