@@ -29,7 +29,7 @@ class PublicSuffixList
     def initialize
       @cache_dir = nil
       @cache_expiry_period = 30 * 24 * 60 * 60
-      @url = "https://publicsuffix.org/list/effective_tld_names.dat"
+      @url = "https://publicsuffix.org/list/public_suffix_list.dat"
     end
 
   end
