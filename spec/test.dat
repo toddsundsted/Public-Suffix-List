@@ -4,7 +4,7 @@ com
 *.hokkaido.jp
 *.tokyo.jp
 !pref.hokkaido.jp
-!metro.tokyo.jp 
+!metro.tokyo.jp
 
 // "foo" and "qux.foo" are not tlds
 bar.foo

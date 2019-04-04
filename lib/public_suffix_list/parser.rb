@@ -10,7 +10,7 @@ class PublicSuffixList
     # !metro.tokyo.jp
 
     # {
-    #   "com" => {:term => true}, 
+    #   "com" => {:term => true},
     #   "jp" => {
     #     "tokyo" => {"!metro" => {:term => true}, "*" => {:term => true}},
     #     "hokkaido" => {"!pref" => {:term => true}, "*" => {:term => true}},
