@@ -57,19 +57,19 @@ class PublicSuffixList
 
   def split(domain)
     domain = domain.split(".")
-    result = best(match(domain, rules))
+    result = best(match(domain, rules, true))
     [gimme!(domain, result.size), gimme!(domain), domain].reverse.map { |d| d ? d.join(".") : "" }
   end
 
   def tld(domain)
     domain = domain.split(".")
-    result = best(match(domain, rules))
+    result = best(match(domain, rules, true))
     gimme!(domain, result.size).join(".")
   end
 
   def cdn(domain)
     domain = domain.split(".")
-    result = best(match(domain, rules))
+    result = best(match(domain, rules, true))
     gimme!(domain, result.size + 1).join(".")
   end
 
@@ -87,7 +87,7 @@ class PublicSuffixList
     @rules = @cache_file[:rules] unless @cache_file.expired?
   end
 
-  def match(domain, rules)
+  def match(domain, rules, wildcard = false)
     return [] if domain.empty? or rules.empty?
     domain = domain.dup
     first = domain.pop
@@ -96,7 +96,11 @@ class PublicSuffixList
       if rules[pattern]
         set << [name] if rules[pattern][:term]
         match(domain, rules[pattern]).each { |result| set << [first] + result }
+        wildcard = false
       end
+    end
+    if wildcard
+      set << [domain.first]
     end
     set
   end

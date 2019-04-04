@@ -11,6 +11,14 @@ describe PublicSuffixList do
     public_suffix_list.config.url.should == "spec/test.dat"
   end
 
+  it "should match * if no rules match" do
+    public_suffix_list = PublicSuffixList.new(:effective_tld_names_url => "spec/test.dat")
+    public_suffix_list.cache_file.should be nil
+    public_suffix_list.split("www.home.foobar").should == ["www", "home", "foobar"]
+    public_suffix_list.cdn("www.home.foobar").should == "home.foobar"
+    public_suffix_list.tld("www.home.foobar").should == "foobar"
+  end
+
   it "should calculate tld and cdn correctly" do
     public_suffix_list = PublicSuffixList.new(:effective_tld_names_url => "spec/test.dat")
     public_suffix_list.cache_file.should be nil
