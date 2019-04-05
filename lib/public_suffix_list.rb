@@ -58,18 +58,21 @@ class PublicSuffixList
   def split(domain)
     domain = domain.split(".")
     result = best(match(domain, rules, true))
+    return ["", "", ""] if result.empty?
     [gimme!(domain, result.size), gimme!(domain), domain].reverse.map { |d| d ? d.join(".") : "" }
   end
 
   def tld(domain)
     domain = domain.split(".")
     result = best(match(domain, rules, true))
+    return "" if result.empty?
     gimme!(domain, result.size).join(".")
   end
 
   def cdn(domain)
     domain = domain.split(".")
     result = best(match(domain, rules, true))
+    return "" if result.empty?
     gimme!(domain, result.size + 1).join(".")
   end
 
@@ -100,7 +103,7 @@ class PublicSuffixList
       end
     end
     if wildcard
-      set << [domain.first]
+      set << [first]
     end
     set
   end

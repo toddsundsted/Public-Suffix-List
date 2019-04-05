@@ -8,6 +8,20 @@ describe PublicSuffixList do
     public_suffix_list.split("www.home.foobar").should == ["www", "home", "foobar"]
     public_suffix_list.cdn("www.home.foobar").should == "home.foobar"
     public_suffix_list.tld("www.home.foobar").should == "foobar"
+    public_suffix_list.split("foobar").should == ["", "", "foobar"]
+    public_suffix_list.cdn("foobar").should == ""
+    public_suffix_list.tld("foobar").should == "foobar"
+  end
+
+  it "should handle wildcard domains" do
+    public_suffix_list = PublicSuffixList.new(:url => "spec/test.dat")
+    public_suffix_list.cache_file.should be nil
+    public_suffix_list.split("mm").should == ["", "", ""]
+    public_suffix_list.cdn("mm").should == ""
+    public_suffix_list.tld("mm").should == ""
+    public_suffix_list.split("c.mm").should == ["", "", "c.mm"]
+    public_suffix_list.cdn("c.mm").should == ""
+    public_suffix_list.tld("c.mm").should == "c.mm"
   end
 
   it "should calculate tld and cdn correctly" do

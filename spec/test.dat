@@ -1,3 +1,5 @@
+*.mm
+
 // data for cookie calculation, http://publicsuffix.org/format/
 com
 *.jp
