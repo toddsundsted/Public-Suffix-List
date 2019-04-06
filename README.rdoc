@@ -1,6 +1,7 @@
 = Public Suffix List
 
-* http://github.com/toddsundsted/Public-Suffix-List
+{<img src="https://travis-ci.org/toddsundsted/Public-Suffix-List.svg?branch=master">}[https://travis-ci.org/toddsundsted/Public-Suffix-List]
+{<img src="https://img.shields.io/badge/docs-available-brightgreen.svg">}[https://toddsundsted.github.io/Public-Suffix-List/]
 
 == Description
 
