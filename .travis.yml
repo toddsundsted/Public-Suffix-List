@@ -8,3 +8,13 @@ rvm:
 
 script:
   - bundle exec rspec
+  - bundle exec rdoc README.rdoc lib
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  project_name: toddsundsted/Public-Suffix-List
+  on:
+    branch: master
+  local_dir: doc
