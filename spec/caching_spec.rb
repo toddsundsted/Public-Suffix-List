@@ -1,3 +1,4 @@
+# typed: false
 require 'tmpdir'
 require 'public_suffix_list'
 require 'timecop'

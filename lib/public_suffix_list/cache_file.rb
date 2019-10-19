@@ -1,21 +1,24 @@
+# typed: true
 class PublicSuffixList
 
   class CacheFile
 
     def initialize(config)
       @config = config
+      @data = {}
     end
 
     def cache?
-      @config.cache_dir && File.directory?(@config.cache_dir) && true
+      @config.cache_dir && File.directory?(@config.cache_dir) && true || false
     end
 
     def file
-      File.join(@config.cache_dir, URI.parse(@config.url).path.split("/").last + ".cache") if cache?
+      path = URI.parse(@config.url)&.path&.split("/")&.last || ""
+      File.join(@config.cache_dir, path + ".cache")
     end
 
     def exist?
-      File.exist?(file) if cache?
+      cache? && File.exist?(file) && true || false
     end
 
     def delete
@@ -31,7 +34,8 @@ class PublicSuffixList
     end
 
     def data
-      @data or (load_data and @data) or @data = {}
+      @data.empty? and load_data
+      @data
     end
 
     def [](key)
@@ -39,7 +43,7 @@ class PublicSuffixList
     end
 
     def []=(key, value)
-      data.merge!({key => value, created_at: Time.now, tag: rand(36**8).to_s(36)}) and dump_data
+      data.merge!({key => value, created_at: Time.now, tag: rand(2821109907456).to_s(36)}) and dump_data
     end
 
     def expired?

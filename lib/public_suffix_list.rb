@@ -1,3 +1,4 @@
+# typed: true
 $:.unshift(File.dirname(__FILE__)) unless $:.include?(File.dirname(__FILE__))
 
 require 'open-uri'
@@ -59,7 +60,7 @@ class PublicSuffixList
     domain = domain.split(".")
     result = best(match(domain, rules, true))
     return ["", "", ""] if result.empty?
-    [gimme!(domain, result.size), gimme!(domain), domain].reverse.map { |d| d ? d.join(".") : "" }
+    [gimme!(domain, result.size), gimme!(domain), domain].reverse.map { |d| d.join(".") }
   end
 
   def tld(domain)
@@ -79,7 +80,10 @@ class PublicSuffixList
   private
 
   def fetch
-    @rules = Parser.parse(open(@config.url))
+    @rules =
+      if (file = open(@config.url))
+        Parser.parse(file)
+      end
   end
 
   def cache
@@ -95,7 +99,7 @@ class PublicSuffixList
     domain = domain.dup
     first = domain.pop
     set = []
-    [[first.downcase, first], ["!#{first.downcase}", "!#{first}"], ["*", first]].each do |pattern, name|
+    [[first&.downcase, first], ["!#{first&.downcase}", "!#{first}"], ["*", first]].each do |pattern, name|
       if rules[pattern]
         set << [name] if rules[pattern][:term]
         match(domain, rules[pattern]).each { |result| set << [first] + result }
@@ -109,10 +113,9 @@ class PublicSuffixList
   end
 
   def best(results)
-    return [] if results.empty?
-    result = results.find { |r| r.last[0] == ?! } || results.sort { |a, b| a.size <=> b.size }.last
-    result = result[0..result.size - 2] if result.last[0] == ?!
-    result
+    result = results.find { |r| r.last&.[](0) == ?! } || results.sort { |a, b| a.size <=> b.size }.last
+    result = result[0..result.size - 2] if result && result.last&.[](0) == ?!
+    result || []
   end
 
   def gimme!(domain, n = 1)

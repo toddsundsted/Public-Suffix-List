@@ -1,3 +1,4 @@
+# typed: strict
 require 'public_suffix_list'
 
 describe PublicSuffixList do

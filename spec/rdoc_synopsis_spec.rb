@@ -1,3 +1,4 @@
+# typed: strict
 require 'tmpdir'
 require 'public_suffix_list'
 

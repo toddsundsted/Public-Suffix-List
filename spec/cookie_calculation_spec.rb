@@ -1,3 +1,4 @@
+# typed: true
 require 'public_suffix_list'
 
 def cookie_calculation(public_suffix_list, domain)

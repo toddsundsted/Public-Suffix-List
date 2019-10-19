@@ -1,3 +1,4 @@
+# typed: strict
 class PublicSuffixList
 
   module Parser
