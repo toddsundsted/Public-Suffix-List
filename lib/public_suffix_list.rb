@@ -7,7 +7,7 @@ require "public_suffix_list/parser.rb"
 
 class PublicSuffixList
 
-  VERSION = "0.2.1"
+  VERSION = "0.2.2"
 
   def self.config
     @@config ||= Config.new
